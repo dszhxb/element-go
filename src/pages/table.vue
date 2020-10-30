@@ -4,7 +4,7 @@
       title="ExTable"
       :params="params" :filter="filter" @search="search" @page-change="pageChange"
       :total="total" :loading="loading" v-model="data"
-      :shower="shower" show-title="View Data" allow-show @show="show" :show-link="'tree'"
+      :shower="shower" show-title="View Data" allow-show @show="show" show-link="view"
       :editor="editor" edit-title="Edit Data" allow-edit @edit="edit" @update="update"
       :creator="editor" allow-create @create="create" @store="store"
       allow-remove @remove="remove"
@@ -42,7 +42,6 @@ export default {
       selected: [],
       total: 0,
       loading: false,
-      link:false
     }
   },
   computed: {
@@ -92,7 +91,6 @@ export default {
       this.getData()
     },
     show(row) {
-      this.link=!this.link
       console.log('show', row)
     },
     edit(row) {
