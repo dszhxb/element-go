@@ -1,7 +1,8 @@
 <template>
   <el-dialog :fullscreen="!width" :width="width" :title="showTitle" :visible.sync="visible">
     <div class="dialog-content">
-      <el-form size="small" :label-position="labelPosition">
+      <component :is="comChilds" v-if="comChilds&&link"></component>
+      <el-form size="small" :label-position="labelPosition" v-else>
         <el-row :gutter="20">
           <el-col :md="span" v-for="(item, key) in datas" :key="key">
             <el-form-item :label="item.label + ':'" :label-width="labelWidth">
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     show: { type: Boolean, default: false },
@@ -29,12 +31,14 @@ export default {
     columns: { type: Number, default: 2 },
     labelPosition: String,
     labelWidth: String,
+    link:{ type: String, default: '' },
   },
   data() {
     return {
       visible: false,
       showTitle: this.title || this.$t('view'),
       imageSize: '100px', // 默认图片尺寸
+      comChilds:null
     }
   },
   computed: {
@@ -55,6 +59,7 @@ export default {
   watch: {
     show() {
       this.visible = this.show
+      this.show ? this.loadLocaleComponents():this.comChilds = null
     },
     visible (val) {
       if (!val) this.close() // 关闭窗口
@@ -63,7 +68,10 @@ export default {
   methods: {
     close() {
       this.$emit("close")
-    }
+    },
+    loadLocaleComponents(){
+      this.comChilds = require(`./../../src/pages/${this.link}.vue`).default;
+    },
   }
 }
 </script>
