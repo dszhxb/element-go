@@ -30,7 +30,7 @@ export default {
     columns: { type: Number, default: 2 },
     labelPosition: String,
     labelWidth: String,
-    link: String,
+    link: Object,
   },
   data() {
     return {
@@ -58,7 +58,7 @@ export default {
   watch: {
     show() {
       this.visible = this.show
-      this.comChilds = this.show ? this.loadLocaleComponents() : null
+      this.comChilds = this.show&&this.link?this.link : null
     },
     visible (val) {
       if (!val) this.close() // 关闭窗口
@@ -67,9 +67,6 @@ export default {
   methods: {
     close() {
       this.$emit("close")
-    },
-    loadLocaleComponents() {
-      return require(`./../../src/pages/${this.link}.vue`).default;
     },
   }
 }

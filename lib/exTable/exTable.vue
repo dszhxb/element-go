@@ -81,7 +81,7 @@ export default {
     showColumns: Number,
     showLabelPosition: String,
     showLabelWidth: String,
-    showLink:String,
+    showLink:Object,
     editTitle: String,
     editWidth: String,
     editColumns: Number,

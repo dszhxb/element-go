@@ -4,7 +4,7 @@
       title="ExTable"
       :params="params" :filter="filter" @search="search" @page-change="pageChange"
       :total="total" :loading="loading" v-model="data"
-      :shower="shower" show-title="View Data" allow-show @show="show" show-link="view"
+      :shower="shower" show-title="View Data" allow-show :show-link="link" @show="show"
       :editor="editor" edit-title="Edit Data" allow-edit @edit="edit" @update="update"
       :creator="editor" allow-create @create="create" @store="store"
       allow-remove @remove="remove"
@@ -70,8 +70,12 @@ export default {
         { name: 'age', label: '年龄', readonly: true },
         { name: 'state', label: '状态', type: 'select', options: this.states },
       ]
-    }
+    },
+    link(){
+      return require(`@/pages/tree.vue`).default
+    },
   },
+
   methods: {
     getData() {
       this.loading = true

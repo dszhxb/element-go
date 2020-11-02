@@ -1,6 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
 
+const resolve = dir => require('path').join(__dirname, dir)
+
 // 执行环境
 const NODE_ENV = process.env.NODE_ENV;
 
@@ -51,7 +53,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src')
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
